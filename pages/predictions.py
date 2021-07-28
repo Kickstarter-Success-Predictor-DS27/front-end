@@ -257,8 +257,8 @@ def predict(goal, Dance, Fashion, FilmVideo, Games, staff_pick_2, is_starrable_2
         #df = df[:2]
         y_pred = model.predict(df)[0]
         y_round = round(y_pred)
-        print(df)
-        print(y_pred)
+        #print(df) --> used this for testing outputs
+        #print(y_pred)
         if y_round == 1:
             return "This campaign is likely to succeed"
         else:
