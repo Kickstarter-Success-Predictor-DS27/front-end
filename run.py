@@ -10,34 +10,6 @@ from app import app, server
 from pages import index, predictions, insights, process
 
 # Navbar docs: https://dash-bootstrap-components.opensource.faculty.ai/l/components/navbar
-# navbar = dbc.NavbarSimple(
-#     brand='Kickstarter-Success-Predictor',
-#     brand_href='/', 
-#     children=[
-#         dbc.NavItem(dcc.Link('Predictions', href='/predictions', className='nav-link')), 
-#         dbc.NavItem(dcc.Link('Insights', href='/insights', className='nav-link')), 
-#         dbc.NavItem(dcc.Link('Process', href='/process', className='nav-link')), 
-#     ],
-#     sticky='top',
-#     color='light', 
-#     light=True, 
-#     dark=False
-# )
-
-navbar = dbc.DropdownMenu(
-    label='Menu',
-    bs_size="lg",
-    color="success",
-    children=[
-        dbc.NavItem(dcc.Link('Predictions', href='/predictions', className='nav-link')), 
-        dbc.NavItem(dcc.Link('Insights', href='/insights', className='nav-link')), 
-        dbc.NavItem(dcc.Link('Process', href='/process', className='nav-link')),
-        dbc.DropdownMenuItem(divider=True), 
-        dbc.NavItem(dcc.Link('Home', href='/', className='nav-link')),
-    ],
-    className="mb-1",
-    right=True
-)
 
 navbar = dbc.NavbarSimple(
     children=[
