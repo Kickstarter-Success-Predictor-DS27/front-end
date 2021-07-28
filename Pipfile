@@ -4,6 +4,12 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+pandas = "*"
+dash = "*"
+dash-bootstrap-components = "*"
+sklearn = "*"
+gunicorn = "*"
+joblib = "*"
 
 [dev-packages]
 
