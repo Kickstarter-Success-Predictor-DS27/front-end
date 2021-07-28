@@ -4,14 +4,15 @@ import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
+import pandas as pd
 #import tensorflow as tf
 #import keras as ks
-import pandas as pd
+
 #import numpy as np
 
 # Imports from this application
 from app import app
-import joblib
+from joblib import load
 
 # 2 column layout. 1st column width = 4/12
 # https://dash-bootstrap-components.opensource.faculty.ai/l/components/layout
@@ -19,7 +20,7 @@ import joblib
 #model = ks.models.load_model(loc) --> load keras model
 
 loc1 = './assets/clf_model.h5'
-model = joblib.load(loc1)
+model = load(loc1)
 
 ALLOWED_TYPES = (
      "number",
