@@ -11,7 +11,7 @@ import pandas as pd
 
 # Imports from this application
 from app import app
-from joblib import load
+import joblib
 
 # 2 column layout. 1st column width = 4/12
 # https://dash-bootstrap-components.opensource.faculty.ai/l/components/layout
@@ -19,7 +19,7 @@ from joblib import load
 #model = ks.models.load_model(loc) --> load keras model
 
 loc1 = './assets/clf_model.h5'
-model = load(loc1)
+model = joblib.load(loc1)
 
 ALLOWED_TYPES = (
      "number",
