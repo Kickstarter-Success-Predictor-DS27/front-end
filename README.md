@@ -1,2 +1,2 @@
-# front-end
-This repo houses the front end of our recommender app. 
+# Dash Template
+The front-end where we make the app look all pretty and stuff.
