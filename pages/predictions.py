@@ -4,10 +4,10 @@ import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
-import tensorflow as tf
-import keras as ks
+#import tensorflow as tf
+#import keras as ks
 import pandas as pd
-import numpy as np
+#import numpy as np
 
 # Imports from this application
 from app import app
