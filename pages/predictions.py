@@ -5,7 +5,6 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 import pandas as pd
-import sklearn
 #import tensorflow as tf
 #import keras as ks
 
@@ -13,7 +12,7 @@ import sklearn
 
 # Imports from this application
 from app import app
-#from joblib import load
+from joblib import load
 
 # 2 column layout. 1st column width = 4/12
 # https://dash-bootstrap-components.opensource.faculty.ai/l/components/layout
@@ -21,7 +20,7 @@ from app import app
 #model = ks.models.load_model(loc) --> load keras model
 
 loc1 = './assets/clf_model.h5'
-model = sklearn.joblib.load(loc1)
+model = load(loc1)
 
 
 body = dbc.Container([
