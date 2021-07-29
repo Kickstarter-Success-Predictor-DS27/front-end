@@ -29,9 +29,18 @@ body = dbc.Container([
         dcc.Markdown(
             '''
             Just a quick little note. When loading the Correlation Matrix Associated with our 
-            model it seems that fashion is not a great category to go into when starting a kickstarter.
-            The biggest factors seem to be whether or not your Kickstater is "staff picked" or in the
-            "Dance" category.
+            model it seems that the largest contributor to a successful Kickstarter is going to be 
+            whether or not your campaign is "Staff Picked." It means that the more spotlight and exposure
+            your project has, the better chances it has at being successful. 
+            '''
+        ),
+    ]),
+
+    dbc.Row([
+        dcc.Markdown(
+            '''
+            Also, setting to lofty of a goal, as in asking for too much money, can easily 
+            change the outcome of your campaign.
             '''
         ),
     ]),

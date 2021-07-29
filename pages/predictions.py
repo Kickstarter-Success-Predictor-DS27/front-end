@@ -5,6 +5,8 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 import pandas as pd
+#import tensorflow as tf
+#import keras as ks
 
 #import numpy as np
 
@@ -17,25 +19,11 @@ from joblib import load
 #loc = './assets/base_model.h5' --> base model
 #model = ks.models.load_model(loc) --> load keras model
 
-loc1 = './assets/clf_model.h5'
+loc1 = './assets/clf1_model.h5'
 model = load(loc1)
 
 
 body = dbc.Container([
-
-        ## Slider incase we decide it looks better
-        # dcc.Markdown('''#### Goal (USD)'''),
-        # dcc.Slider(
-        #     id='goal',
-        #     min=1,
-        #     max=100000000,
-        #     step=50000,
-        #     value=4590,
-        #     ),
-        # dcc.Markdown('', id='goal-container',
-        #              style ={'textAlign': 'center',
-        #                      'font-size': 18},
-        #              className='mb-5'),
 
         dcc.Markdown('''#### Goal (USD)''',
         style ={'textAlign': 'center', 'font-size': 30}),
@@ -60,86 +48,97 @@ body2 = dbc.Container([
 
 
 column1 = dbc.Col(
-    [   
-        ## Commenting out instead of deleting just ot save time
-        # dcc.Markdown('''#### Goal (USD)'''),
-        # dcc.Slider(
-        #     id='goal',
-        #     min=0,
-        #     max=100000000,
-        #     step=50000,
-        #     value=4590,
-        # ),
-        # dcc.Markdown('', id='goal-container'),
-
-        ## Feature leakage so keeping it incase we need it layer
-        # dcc.Markdown('''#### Pledged Amount (USD)'''),
-        # dcc.Slider(
-        #     id='usd_pledged',
-        #     min=0,
-        #     max=9000000,
-        #     step=1000,
-        #     value=200000,
-        # ),
-        # dcc.Markdown('', id='usd_pledged-container'),
-
-        # dcc.Markdown('''#### Backers Count'''),
-        # dcc.Slider(
-        #     id='backers_count',
-        #     min=0,
-        #     max=60000,
-        #     step=1000,
-        #     value=250,
-        # ),
-        # dcc.Markdown('', id='backers_count-container'),
-
-        dcc.Markdown('''#### Dance'''),
-        dbc.Label('Is this Dance Related?'),
+    [ 
+        dcc.Markdown('''#### Category'''),
+        dbc.Label('Is kind of campaign?'),
         dcc.Dropdown(
-            id='Dance',
-            options=[{'label': 'Yes', 'value': 1},
-                     {'label': 'No', 'value': 0},
+            id='sub_categories',
+            options=[{'label': 'Games', 'value': 3},
+                     {'label': 'Film & Video', 'value': 2},
+                     {'label': 'Fashion', 'value': 1},
+                     {'label': 'Dance', 'value': 0},
                       ],
             value=0,
             className='mb-5',
             ),
 
-        dcc.Markdown('''#### Fashion'''),
-        dbc.Label('Is this Fashion Related?'),
+        dcc.Markdown('''#### Location'''),
+        dbc.Label("What's the Location?"),
         dcc.Dropdown(
-            id='Fashion',
-            options=[{'label': 'Yes', 'value': 1},
-                     {'label': 'No', 'value': 0},
-                      ],
-            value=0,
+            id='sub_location',
+            options=[{'label': 'Zambia', 'value': 64},
+                     {'label': 'Viet Nam', 'value': 63},
+                     {'label': 'Uruguay', 'value': 62},
+                     {'label': 'United States', 'value': 61},
+                     {'label': 'Uganda', 'value': 60},
+                     {'label': 'Ukraine', 'value': 59},
+                     {'label': 'Taiwan', 'value': 58},
+                     {'label': 'Trinidad and Tobago', 'value': 57},
+                     {'label': 'Turkey', 'value': 56},
+                     {'label': 'Thailand', 'value': 55},
+                     {'label': 'Slovakia', 'value': 54},
+                     {'label': 'Singapore', 'value': 53},
+                     {'label': 'Sweden', 'value': 52},
+                     {'label': 'Russian Federation', 'value': 51},
+                     {'label': 'Serbia', 'value': 50},
+                     {'label': 'Romania', 'value': 49},
+                     {'label': 'Portugal', 'value': 48},
+                     {'label': 'Puerto Rico', 'value': 47},
+                     {'label': 'Poland', 'value': 46},
+                     {'label': 'Philippines', 'value': 45},
+                     {'label': 'New Zealand', 'value': 43},
+                     {'label': 'Norway', 'value': 42},
+                     {'label': 'Netherlands', 'value': 41},
+                     {'label': 'Malaysia', 'value': 40},
+                     {'label': 'Mexico', 'value': 39},
+                     {'label': 'Mali', 'value': 38},
+                     {'label': 'Republic of Macedonia', 'value': 37},
+                     {'label': 'Latvia', 'value': 36},
+                     {'label': 'Lithuania', 'value': 35},
+                     {'label': 'Korea (South)', 'value': 34},
+                     {'label': 'Japan', 'value': 33},
+                     {'label': 'Jordan', 'value': 32},
+                     {'label': 'Jamaica', 'value': 31},
+                     {'label': 'Italy', 'value': 30},
+                     {'label': 'Iceland', 'value': 29},
+                     {'label': 'India', 'value': 28},
+                     {'label': 'Isreal', 'value': 27},
+                     {'label': 'Ireland', 'value': 26},
+                     {'label': 'Hungary', 'value': 25},
+                     {'label': 'Haiti', 'value': 24},
+                     {'label': 'Hong Kong', 'value': 23},
+                     {'label': 'Greece', 'value': 22},
+                     {'label': 'Ghana', 'value': 21},
+                     {'label': 'United Kingdom', 'value': 20},
+                     {'label': 'France', 'value': 19},
+                     {'label': 'Fiji', 'value': 18},
+                     {'label': 'Finland', 'value': 17},
+                     {'label': 'Ethiopia', 'value': 16},
+                     {'label': 'Spain', 'value': 15},
+                     {'label': 'Egypt', 'value': 14},
+                     {'label': 'Algeria', 'value': 13},
+                     {'label': 'Denmark', 'value': 12},
+                     {'label': 'Germany', 'value': 11},
+                     {'label': 'Czech Republic', 'value': 10},
+                     {'label': 'China', 'value': 9},
+                     {'label': "Côte d'Ivoire", 'value': 8},
+                     {'label': 'Switzerland', 'value': 7},
+                     {'label': 'Canada', 'value': 6},
+                     {'label': 'Bulgaria', 'value': 5},
+                     {'label': 'Belgium', 'value': 4},
+                     {'label': 'Bosnia and Herzegovina', 'value': 3},
+                     {'label': 'Australia', 'value': 2},
+                     {'label': 'Austria', 'value': 1},
+                     {'label': 'Argentina', 'value': 0},
+                     ],
+            value=61,
             className='mb-5',
             ),
 
-        dcc.Markdown('''#### Film & Video'''),
-        dbc.Label('Is this Film & Video Related?'),
-        dcc.Dropdown(
-            id='FilmVideo',
-            options=[{'label': 'Yes', 'value': 1},
-                     {'label': 'No', 'value': 0},
-                      ],
-            value=0,
-            className='mb-5',
-            ),        
         ],
     )
 
-column2 = dbc.Col(
-    [
-        dcc.Markdown('''#### Game'''),
-        dbc.Label('Is this Game Related?'),
-        dcc.Dropdown(
-            id='Games',
-            options=[{'label': 'Yes', 'value': 1},
-                     {'label': 'No', 'value': 0},
-                      ],
-            value=0,
-            className='mb-5',
-            ), 
+column2 = dbc.Col([
 
         dcc.Markdown('''#### Starrable?'''),
         dbc.Label('Starrable?'),
@@ -201,11 +200,6 @@ def update_output(value):
     return 'Goal(USD) = "{}"'.format(value)
 
 ## May or may not need depending on model.
-# @app.callback(
-#     dash.dependencies.Output('backers_count-container', 'children'),
-#     [dash.dependencies.Input('backers_count', 'value')])
-# def update_output(value):
-#     return 'Backers Count = "{}"'.format(value)
 
 # @app.callback(
 #     dash.dependencies.Output('usd_pledged-container', 'children'),
@@ -240,23 +234,21 @@ def update_output(value):
 @app.callback(
     Output('prediction-content','children'),
     [ Input('goal', 'value'),
-      Input('Dance', 'value'),
-      Input('Fashion', 'value'),
-      Input('FilmVideo', 'value'),
-      Input('Games', 'value'),
+      Input('sub_categories', 'value'),
+      Input('sub_location', 'value'),
       Input('staff_pick_2', 'value'),
       Input('is_starrable_2', 'value'),
      ])
 
-def predict(goal, Dance, Fashion, FilmVideo, Games, staff_pick_2, is_starrable_2):
-        df = pd.DataFrame(columns=['goal', 'Dance', 'Fashion', 'Film & Video', 'Games', 'staff_pick_2', 'is_starrable_2'],
-        data=[[goal, Dance, Fashion, FilmVideo, Games, staff_pick_2, is_starrable_2]])
+def predict(goal, sub_categories, sub_locations, staff_pick_2, is_starrable_2):
+        df = pd.DataFrame(columns=['goal', 'sub_categories', 'sub_location', 'staff_pick_2', 'is_starrable_2'],
+        data=[[goal, sub_categories, sub_locations, staff_pick_2, is_starrable_2]])
         #df = np.array(df).astype('float32')
         #df = df[:2]
         y_pred = model.predict(df)[0]
         y_round = round(y_pred)
-        #print(df) --> used this for testing outputs
-        #print(y_pred)
+        print(df) #--> used this for testing outputs
+        print(y_pred)
         if y_round == 1:
             return "This campaign is likely to succeed"
         else:
