@@ -8,21 +8,9 @@ from dash.dependencies import Input, Output
 # Imports from this application
 from app import app
 
-# 1 column layout
+
 # https://dash-bootstrap-components.opensource.faculty.ai/l/components/layout
-# column1 = dbc.Col(
-#     [
-#         dcc.Markdown(
-#             """
-        
-#             ## Insights
 
-
-#             """
-#         ),
-
-#     ],
-# )
 
 body = dbc.Container([
     dbc.Row([
@@ -53,4 +41,31 @@ body = dbc.Container([
        )
 ]
 )
-layout = html.Div([body])
+
+body1 = dbc.Container([
+    dbc.Row([
+        dcc.Markdown(
+            '''
+            We also have a graph here of our feature importances. Our category feature and whether or not
+            the Kickstarter is starrable play a large part in our models performace.
+            '''
+        ),
+    ]),
+
+    dbc.Row([
+        dcc.Markdown(
+            '''
+            It's no surprise either that location seems to have the least importance as the Internet
+            keeps us better connected than ever before.
+            '''
+        ),
+    ]),
+    dbc.Row([
+            html.Img(src='assets/Feature_importance.png',
+                     className='img-fluid', 
+                     style={'height':'50%', 'width':'50%'})
+            ], justify="center", align="center", className="h-50"  
+       )
+]
+)
+layout = html.Div([body, body1])

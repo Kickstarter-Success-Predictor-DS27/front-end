@@ -149,8 +149,7 @@ column2 = dbc.Col([
                       ],
             value=1,
             className='mb-5',
-        ),    
-        #dcc.Markdown('', id='is_starrable_2'),
+        ),
 
 
         dcc.Markdown('''#### Staff Pick'''),
@@ -162,74 +161,14 @@ column2 = dbc.Col([
                      ],
             value=1,
             className='mb-5'
-        ),
-        #dcc.Markdown('', id='staff_pick_2'),
+        ), 
+        ])
 
-        # Removed due to feature leakage
-        # dcc.Markdown('''#### Spotlight'''),
-        # dbc.Label('In the Spotlight?'),
-        # dcc.Dropdown(
-        #     id='spotlight_2',
-        #     options=[{'label': 'Yes', 'value': 1},
-        #              {'label': 'No', 'value': 0},
-        #              ],
-        #     value=1,
-        #     className='mb-5'
-        # ),
-        # #dcc.Markdown('', id='spotlight_2'),        
-
-        ],
-    
-    )
-## Not needed after moving features around
-# column3 =  dbc.Col([
-#             # dcc.Markdown('''#### Predicted Status'''),
-            
-#             dcc.Markdown('',id='prediction-content', style={
-#             'textAlign':'center',
-#             'font-size':30}),
-            
-#             #html.Img(src='assets/confusion_plot_rf.png', className='img-fluid')
-# ])   
-
-# Takes inputs from user and returning to show their selection
 @app.callback(
     dash.dependencies.Output('goal-container', 'children'),
     [dash.dependencies.Input('goal', 'value')])
 def update_output(value):
     return 'Goal(USD) = "{}"'.format(value)
-
-## May or may not need depending on model.
-
-# @app.callback(
-#     dash.dependencies.Output('usd_pledged-container', 'children'),
-#     [dash.dependencies.Input('usd_pledged', 'value')])
-# def update_output(value):
-#     return 'Pledged Amount (USD) = "{}"'.format(value)
-
-# Callback for the prediction container
-# @app.callback(
-#     Output('prediction-content','children'),
-#     [ Input('backers_count', 'value'),
-#       Input('goal', 'value'),
-#       Input('usd_pledged', 'value'),
-#       Input('spotlight_2', 'value'),
-#       Input('staff_pick_2', 'value'),
-#       Input('is_starrable_2', 'value'),
-#      ])
-
-# def predict(backers_count, goal, usd_pledge, spotlight_2, staff_pick_2, is_starrable_2):
-#         df = pd.DataFrame(columns=['backers_count', 'goal', 'usd_pledged', 'spotlight_2', 'staff_pick_2', 'is_starrable_2'],
-#         data=[[backers_count, goal, usd_pledge, spotlight_2, staff_pick_2, is_starrable_2]])
-#         df = np.array(df).astype('float32')
-#         df = df[:2]
-#         y_pred = model.predict(df)[0][0]
-#         y_round = round(y_pred)
-#         print(y_pred)
-#         if y_round == 1:
-#             return "This campaign is likely to be successful"
-#         else:
-#             return "This campaign is likely to fail."
  
 @app.callback(
     Output('prediction-content','children'),
@@ -243,17 +182,13 @@ def update_output(value):
 def predict(goal, sub_categories, sub_locations, staff_pick_2, is_starrable_2):
         df = pd.DataFrame(columns=['goal', 'sub_categories', 'sub_location', 'staff_pick_2', 'is_starrable_2'],
         data=[[goal, sub_categories, sub_locations, staff_pick_2, is_starrable_2]])
-        #df = np.array(df).astype('float32')
-        #df = df[:2]
         y_pred = model.predict(df)[0]
         y_round = round(y_pred)
-        print(df) #--> used this for testing outputs
-        print(y_pred)
+        #print(df) #--> used this for testing outputs
+        print(y_round)
         if y_round == 1:
             return "This campaign is likely to succeed"
         else:
             return "This campaign is likely to fail."
-
-#layout = dbc.Row([column1, column2, column3])
 
 layout = dbc.Row([body, column1, column2, body2])
